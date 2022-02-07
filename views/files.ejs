@@ -1,0 +1,28 @@
+<html>
+    <title>httpfs</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+        <h3>Here's a list of files</h3>
+        
+        <form action="/files" method="get">
+            <input type="text" id="path" name="path" placeholder="Enter path, eg: D:/misc/" value="<%= path %>">
+            <button type="submit" value="search">search</button>
+        </form>
+
+        <% if(err != "") {%>
+        <p><%= err %></p>
+        <% } %>
+
+        <% for(let i=0; i<data.length; i++) {%>
+            <% if(data[i].includes(".") > 0) { %>
+                <p> <a href="/download?path=<%= path + '/' + data[i] %>"> <%=  data[i] %> </a> </p>
+            <% } else { %>
+                <p> <a href="/files?path=<%= path + '/' + data[i] %>"> <%=  data[i] %> </a> </p>
+            <% } %>
+        <% } %>
+
+    </body>
+</html>
